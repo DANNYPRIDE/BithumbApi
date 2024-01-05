@@ -1,6 +1,5 @@
 from client.PrivateApiClient import privateApiClient
 from client.PublicApiClient import publicApiClient
-import time
 
 btcUnitPrice = 1000
 orderList = []
