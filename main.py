@@ -2,19 +2,32 @@ from client.PrivateApiClient import privateApiClient
 from client.PublicApiClient import publicApiClient
 
 btcUnitPrice = 1000
-orderList = []
 
 while True:
 
-    (remainingBtc, lockedBtc, remainingKrw, lockedKrw) = privateApiClient.getBalance("BTC")
-    currentPrice = publicApiClient.getCurrentPrice("BTC")
+    try:
+        (remainingBtc, lockedBtc, remainingKrw, lockedKrw) = privateApiClient.getBalance("BTC")
+        currentPrice = publicApiClient.getCurrentPrice("BTC")
+    except Exception as e:
+        continue
 
-    for i in range(1, 5):
-        buyOrder = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice * i * 1),
-                                             unit=(remainingKrw/4) / currentPrice)
-        sellOrder = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice * i * 1), unit=remainingBtc / 4)
-        orderList.append(buyOrder)
-        orderList.append(sellOrder)
+    buyOrder = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice), unit=(remainingKrw/4) / currentPrice)
+    sellOrder = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice), unit=remainingBtc / 4)
 
-    while len(orderList) > 0:
-        privateApiClient.cancelOrder(orderList.pop())
+    buyOrder2 = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice * 2), unit=(remainingKrw / 4) / currentPrice)
+    sellOrder2 = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice * 2), unit=remainingBtc / 4)
+
+    buyOrder3 = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice * 3), unit=(remainingKrw / 4) / currentPrice)
+    sellOrder3 = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice *3), unit=remainingBtc / 4)
+
+    buyOrder4 = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice *4), unit=(remainingKrw / 4) / currentPrice)
+    sellOrder4 = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice *4), unit=remainingBtc / 4)
+
+    privateApiClient.cancelOrder(buyOrder)
+    privateApiClient.cancelOrder(sellOrder)
+    privateApiClient.cancelOrder(buyOrder2)
+    privateApiClient.cancelOrder(sellOrder2)
+    privateApiClient.cancelOrder(buyOrder3)
+    privateApiClient.cancelOrder(sellOrder3)
+    privateApiClient.cancelOrder(buyOrder4)
+    privateApiClient.cancelOrder(sellOrder4)
