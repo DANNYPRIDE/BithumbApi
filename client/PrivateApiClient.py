@@ -13,10 +13,10 @@ class PrivateApiClient:
         return self.bithumb.get_balance(symbol)
 
     def buyOrder(self, price, unit):
-        return self. bithumb.buy_limit_order("BTC", price, unit)
+        return self.bithumb.buy_limit_order("BTC", price, unit)
 
     def sellOrder(self, price, unit):
-        return self. bithumb.sell_limit_order("BTC", price, unit)
+        return self.bithumb.sell_limit_order("BTC", price, unit)
 
     def getReaminingOrder(self, order):
         return self.bithumb.get_outstanding_order(order)
