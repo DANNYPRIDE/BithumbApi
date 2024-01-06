@@ -9,10 +9,10 @@ while True:
     (remainingBtc, lockedBtc, remainingKrw, lockedKrw) = privateApiClient.getBalance("BTC")
     currentPrice = publicApiClient.getCurrentPrice("BTC")
 
-    for i in range(1, 6):
+    for i in range(1, 5):
         buyOrder = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice * i * 1),
-                                             unit=(remainingKrw/5) / currentPrice)
-        sellOrder = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice * i * 1), unit=remainingBtc / 5)
+                                             unit=(remainingKrw/4) / currentPrice)
+        sellOrder = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice * i * 1), unit=remainingBtc / 4)
         orderList.append(buyOrder)
         orderList.append(sellOrder)
 
