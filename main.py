@@ -10,18 +10,21 @@ while True:
         currentPrice = publicApiClient.getCurrentPrice("BTC")
     except Exception as e:
         continue
+    buyOrder = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice * 4),
+                                         unit=(remainingKrw / 4) / currentPrice)
+    sellOrder = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice * 4), unit=remainingBtc / 4)
 
-    buyOrder = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice), unit=(remainingKrw/4) / currentPrice)
-    sellOrder = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice), unit=remainingBtc / 4)
+    buyOrder2 = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice * 8),
+                                      unit=(remainingKrw / 4) / currentPrice)
+    sellOrder2 = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice * 8), unit=remainingBtc / 4)
 
-    buyOrder2 = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice * 2), unit=(remainingKrw / 4) / currentPrice)
-    sellOrder2 = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice * 2), unit=remainingBtc / 4)
+    buyOrder3 = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice * 12),
+                                      unit=(remainingKrw / 4) / currentPrice)
+    sellOrder3 = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice * 12), unit=remainingBtc / 4)
 
-    buyOrder3 = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice * 3), unit=(remainingKrw / 4) / currentPrice)
-    sellOrder3 = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice *3), unit=remainingBtc / 4)
-
-    buyOrder4 = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice *4), unit=(remainingKrw / 4) / currentPrice)
-    sellOrder4 = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice *4), unit=remainingBtc / 4)
+    buyOrder4 = privateApiClient.buyOrder(price=int(currentPrice - btcUnitPrice * 16),
+                                      unit=(remainingKrw / 4) / currentPrice)
+    sellOrder4 = privateApiClient.sellOrder(price=int(currentPrice + btcUnitPrice * 16), unit=remainingBtc / 4)
 
     privateApiClient.cancelOrder(buyOrder)
     privateApiClient.cancelOrder(sellOrder)
